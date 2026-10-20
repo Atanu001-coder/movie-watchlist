@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Watchlist</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <%- include("partials/header") %>
+    <h1>MY MOVIE WATCHLIST</h1>
+    <a href="/movies/new">Add New Movie</a>
+
+    <ul>
+        <% for(movie of movies){ %>
+            <li>
+                <a href="/movies/<%= movie.id %>"><b><%= movie.title %></b></a>
+                ( <%=movie.genre%> )
+                - <%= movie.watched ? "Watched" : "Not Watched" %>
+                <a href="/movies/<%= movie.id %>/edit">Edit</a>
+                <form action="/movies/<%= movie.id %>?_method=DELETE" method="POST" style="display:inline" onsubmit="return confirm('Delete this movie?')">
+                   <button type="submit">Delete</button>
+                </form>
+            </li>
+       <% } %>
+    </ul>
+</body>
+</html>
